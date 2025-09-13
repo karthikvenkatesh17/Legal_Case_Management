@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+  <record id="demo_partner_lawyer_1" model="res.partner">
+    <field name="name">Adv. Alice Smith</field>
+    <field name="is_lawyer">True</field>
+  </record>
+  <record id="demo_partner_lawyer_2" model="res.partner">
+    <field name="name">Adv. Bob Jones</field>
+    <field name="is_lawyer">True</field>
+  </record>
+
+  <record id="demo_partner_client_1" model="res.partner">
+    <field name="name">Client A Ltd</field>
+    <field name="is_client">True</field>
+  </record>
+  <record id="demo_partner_client_2" model="res.partner">
+    <field name="name">Client B</field>
+    <field name="is_client">True</field>
+  </record>
+  <record id="demo_partner_client_3" model="res.partner">
+    <field name="name">Client C</field>
+    <field name="is_client">True</field>
+  </record>
+
+  <!-- Cases -->
+  <record id="demo_case_1" model="legal.case">
+    <field name="name">New</field>
+    <field name="client_id" ref="demo_partner_client_1"/>
+    <field name="responsible_lawyer_id" ref="demo_partner_lawyer_1"/>
+    <field name="case_type">civil</field>
+    <field name="stage">active</field>
+    <field name="description">Demo civil case.</field>
+    <field name="fixed_fee_amount">1500.0</field>
+  </record>
+
+  <record id="demo_case_2" model="legal.case">
+    <field name="name">New</field>
+    <field name="client_id" ref="demo_partner_client_2"/>
+    <field name="responsible_lawyer_id" ref="demo_partner_lawyer_2"/>
+    <field name="case_type">criminal</field>
+    <field name="stage">intake</field>
+    <field name="description">Demo criminal case.</field>
+  </record>
+
+  <record id="demo_case_closed" model="legal.case">
+    <field name="name">New</field>
+    <field name="client_id" ref="demo_partner_client_3"/>
+    <field name="responsible_lawyer_id" ref="demo_partner_lawyer_1"/>
+    <field name="case_type">family</field>
+    <field name="stage">closed</field>
+    <field name="description">Closed demo case.</field>
+    <field name="close_date">2024-12-31</field>
+  </record>
+
+  <!-- Hearings -->
+  <record id="demo_hearing_1" model="legal.hearing">
+    <field name="case_id" ref="demo_case_1"/>
+    <field name="name">Hearing #1 - Case 1</field>
+    <field name="date_start">2024-10-01 10:00:00</field>
+    <field name="date_end">2024-10-01 11:00:00</field>
+    <field name="status">planned</field>
+  </record>
+
+  <record id="demo_hearing_2" model="legal.hearing">
+    <field name="case_id" ref="demo_case_1"/>
+    <field name="name">Hearing #2 - Case 1</field>
+    <field name="date_start">2024-11-01 10:00:00</field>
+    <field name="date_end">2024-11-01 11:00:00</field>
+    <field name="status">planned</field>
+  </record>
+
+  <record id="demo_hearing_3" model="legal.hearing">
+    <field name="case_id" ref="demo_case_2"/>
+    <field name="name">Hearing #1 - Case 2</field>
+    <field name="date_start">2024-09-15 14:00:00</field>
+    <field name="date_end">2024-09-15 15:00:00</field>
+    <field name="status">planned</field>
+  </record>
+
+  <!-- Create a draft invoice for demo_case_1 if account module available -->
+  <record id="demo_invoice_case_1" model="account.move">
+    <field name="move_type">out_invoice</field>
+    <field name="partner_id" ref="demo_partner_client_1"/>
+    <field name="invoice_origin" ref="demo_case_1"/>
+    <field name="legal_case_id" ref="demo_case_1"/>
+    <field name="invoice_line_ids" eval="[(0,0, {'name': 'Legal Services', 'quantity':1, 'price_unit':1500.0})]"/>
+  </record>
+
+</odoo>

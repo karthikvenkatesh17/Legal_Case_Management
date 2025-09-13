@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_partner_form_inherit_legal" model="ir.ui.view">
+    <field name="name">res.partner.form.legal</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet/notebook/page" position="inside">
+        <page string="Legal">
+          <group>
+            <field name="is_client"/>
+            <field name="is_lawyer"/>
+            <field name="bar_number"/>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="view_partner_search_legal" model="ir.ui.view">
+    <field name="name">res.partner.search.legal</field>
+    <field name="model">res.partner</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <filter string="Lawyers" domain="[('is_lawyer','=',True)]"/>
+        <filter string="Clients" domain="[('is_client','=',True)]"/>
+      </search>
+    </field>
+  </record>
+</odoo>

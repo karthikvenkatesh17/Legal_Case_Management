@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="case_summary_template">
+    <t t-call="web.basic_layout">
+      <t t-foreach="docs" t-as="doc">
+        <div class="page">
+          <h2>Case Summary - <t t-esc="doc.name"/></h2>
+          <table class="table table-sm">
+            <tr><th>Client</th><td><t t-esc="doc.client_id.name or ''"/></td></tr>
+            <tr><th>Responsible Lawyer</th><td><t t-esc="doc.responsible_lawyer_id.name or ''"/></td></tr>
+            <tr><th>Case Type</th><td><t t-esc="dict(doc._fields['case_type'].selection).get(doc.case_type) or doc.case_type"/></td></tr>
+            <tr><th>Stage</th><td><t t-esc="dict(doc._fields['stage'].selection).get(doc.stage) or doc.stage"/></td></tr>
+            <tr><th>Open Date</th><td><t t-esc="doc.open_date or ''"/></td></tr>
+            <tr><th>Close Date</th><td><t t-esc="doc.close_date or ''"/></td></tr>
+          </table>
+
+          <h3>Description</h3>
+          <div t-raw="doc.description or ''"/>
+
+          <h3>Hearings</h3>
+          <t t-if="doc.hearing_ids">
+            <table class="table table-sm">
+              <tr><th>Title</th><th>Start</th><th>End</th><th>Status</th><th>Location</th></tr>
+              <t t-foreach="doc.hearing_ids" t-as="h">
+                <tr>
+                  <td><t t-esc="h.name"/></td>
+                  <td><t t-esc="h.date_start"/></td>
+                  <td><t t-esc="h.date_end"/></td>
+                  <td><t t-esc="h.status"/></td>
+                  <td><t t-esc="h.location"/></td>
+                </tr>
+              </t>
+            </table>
+          </t>
+          <t t-if="not doc.hearing_ids">
+            <p>No hearings recorded.</p>
+          </t>
+
+          <h3>Attachments</h3>
+          <t t-set="attachments" t-value="doc.message_ids.mapped('attachment_ids')"/>
+          <t t-if="attachments">
+            <ul>
+              <t t-foreach="attachments" t-as="a">
+                <li><t t-esc="a.name"/></li>
+              </t>
+            </ul>
+          </t>
+          <t t-if="not attachments">
+            <p>No attachments.</p>
+          </t>
+        </div>
+      </t>
+    </t>
+  </template>
+</odoo>

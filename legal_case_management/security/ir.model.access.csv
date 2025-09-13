@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_legal_case_user,access_legal_case_user,model_legal_case,legal_case_management.group_legal_user,1,1,1,0
+access_legal_case_manager,access_legal_case_manager,model_legal_case,legal_case_management.group_legal_manager,1,1,1,1
+access_legal_hearing_user,access_legal_hearing_user,model_legal_hearing,legal_case_management.group_legal_user,1,1,1,0
+access_legal_hearing_manager,access_legal_hearing_manager,model_legal_hearing,legal_case_management.group_legal_manager,1,1,1,1

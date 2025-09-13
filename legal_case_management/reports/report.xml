@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="action_report_case_summary" model="ir.actions.report">
+    <field name="name">Case Summary</field>
+    <field name="model">legal.case</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">legal_case_management.case_summary_template</field>
+    <field name="report_file">legal_case_management.case_summary_template</field>
+  </record>
+</odoo>

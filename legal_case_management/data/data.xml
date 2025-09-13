@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Optionally create a "Legal Services" product if product module is installed -->
+    <!-- This will be attempted by the module's code; creating here helps demo setups -->
+    <data noupdate="1">
+        <record id="product_legal_services" model="product.product">
+            <field name="name">Legal Services</field>
+            <field name="type">service</field>
+        </record>
+    </data>
+</odoo>

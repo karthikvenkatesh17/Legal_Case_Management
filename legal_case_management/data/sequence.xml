@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="seq_legal_case" model="ir.sequence">
+    <field name="name">Legal Case</field>
+    <field name="code">legal.case</field>
+    <field name="padding">4</field>
+    <field name="prefix">CASE/%(year)s/</field>
+    <field name="implementation">no_gap</field>
+  </record>
+</odoo>
